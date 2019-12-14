@@ -19,7 +19,9 @@ export default class DefaultPage extends Component {
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"></link>
                 </Head>
                 <Navigation/>
-                { this.props.children }
+                <div className={'container'}>
+                    { this.props.children }
+                </div>
             </Fragment>
         )
     }
