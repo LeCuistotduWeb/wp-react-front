@@ -1,5 +1,5 @@
 const defaultConfig = {
-    siteUrl: 'http://wp-test.test/wp-json',
+    siteUrl: 'http://wp-test.test',
 };
 
 export default defaultConfig;

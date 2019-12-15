@@ -1,16 +1,14 @@
-import defaultConfig from '../config'
 import DefaulLayout from '../layouts/defaultLayout'
 import React, { Component } from 'react'
-import axios from 'axios';
 import { Fragment } from 'react'
+import clientApi from '../api/clientApi'
 
 export default class extends Component {
 
-  
     //get the single post data
     static async getInitialProps( context ) {
         const slug = context.query.slug
-        const response = await axios.get( `${defaultConfig.siteUrl}/wp/v2/posts?slug=${ slug }` )
+        const response = await clientApi.getPost(slug)
         return {
             post: response.data[0]
         }
@@ -21,7 +19,7 @@ export default class extends Component {
             <Fragment>
                 <DefaulLayout>
                 <h1>{ this.props.post.title.rendered }</h1>
-                <article
+                <div
                     dangerouslySetInnerHTML={ {
                     __html: this.props.post.content.rendered
                     } } 

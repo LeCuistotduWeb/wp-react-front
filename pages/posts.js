@@ -1,25 +1,23 @@
-import defaultConfig from '../config'
 import React, { Component, Fragment } from 'react'
 import Link from 'next/link'
-import axios from 'axios'
 import DefaultLayout from '../layouts/defaultLayout'
+import clientApi from '../api/clientApi'
 
 export default class extends Component {
 
     //get the posts data
     static async getInitialProps () {
-        const response = await axios.get(`${defaultConfig.siteUrl}/wp/v2/posts`)
+        const posts = await clientApi.getPosts()
         return {
-            posts: response.data
+            posts: posts.data,
         }
     }
-
 
     render() {
         return (
             <Fragment>
                 <DefaultLayout>
-                    <h1>Our Posts Page!</h1>
+                    <h1>listes des articles</h1>
                     <ul>
                         {
                             this.props.posts.map( post => {
