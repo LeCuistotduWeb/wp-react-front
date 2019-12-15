@@ -10,7 +10,7 @@ export default class DefaultPage extends Component {
     render(){
         return (
             <Fragment>
-                <Navigation/>
+                {/* <Navigation/> */}
                 { this.props.children }
             </Fragment>
         )

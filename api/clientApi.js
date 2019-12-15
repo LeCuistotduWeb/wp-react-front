@@ -13,9 +13,9 @@ export default class clientApi {
      */
     static getPosts(limit) {
         if(limit > 0) {
-            return axios.get(`${defaultConfig.siteUrl}/wp/v2/posts?per_page=${limit}`, config)
+            return axios.get(`${defaultConfig.siteUrl}/wp-json/wp/v2/posts?per_page=${limit}`, config)
         }
-        return axios.get(`${defaultConfig.siteUrl}/wp/v2/posts`)
+        return axios.get(`${defaultConfig.siteUrl}/wp-json/wp/v2/posts`)
     }
 
     /**
@@ -48,6 +48,6 @@ export default class clientApi {
      * get menu
      */
     static getMenu(slug) {
-        return axios.get( `${defaultConfig.siteUrl}/wp-json/menus/v1/menus/menu-principal`)
+        return axios.get( `${defaultConfig.siteUrl}/wp-json/menus/v1/menus/${slug}`)
     }
 }

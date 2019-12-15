@@ -20,19 +20,19 @@ export default class Navigation extends Component {
                     <ul id="nav-mobile" className="right">
                         <li><Link href="/posts"><a href="/posts">Articles</a></Link></li>
                         <li><Link href="/about"><a href="/about">A propos</a></Link></li>
-                        {/* {
+                        {
                             this.props.menu.items.map( item => {
                                 return (
-                                    <li key={ item.term_id }>
-                                        <Link href={ `/posts/${ item.url }` }>
-                                            <a href={ `/posts/${ item.url }` }>
-                                                { item.name }
+                                    <li key={ item.id }>
+                                        <Link href={ `${ item.url }` }>
+                                            <a href={ `${ item.url }` }>
+                                                { item.title }
                                             </a>
                                         </Link>
                                     </li>
                                 )
                             })
-                        } */}
+                        }
                     </ul>
                 </div>
             </nav>
