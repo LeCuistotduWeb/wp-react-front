@@ -1,18 +1,19 @@
-import {Component, Fragment} from 'react'
 import Navigation from '../components/Navigation'
+import GlobalContext from '../store/globalContext'
 
-export default class DefaultPage extends Component {
+const DefaultLayout = props => {
 
-    constructor(props){
-        super(props)
+    const contextValue = {
+        navigation: [],
+        updateNavigation: () => {}
     }
 
-    render(){
-        return (
-            <Fragment>
-                {/* <Navigation/> */}
-                { this.props.children }
-            </Fragment>
-        )
-    }
+    return (
+        <GlobalContext.Provider value={contextValue}>
+            <Navigation/>
+            { props.children }
+        </GlobalContext.Provider>
+    )
 }
+
+export default DefaultLayout

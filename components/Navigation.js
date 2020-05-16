@@ -1,41 +1,29 @@
-import React, { Component } from 'react'
 import Link from 'next/link'
 import clientApi from '../api/clientApi'
+import {useState, useEffect} from 'react'
 
-export default class Navigation extends Component {
-
-    //get the menu data
-    static async getInitialProps () {
-        const menu = await clientApi.getMenu('menu-principal')
-        return {
-            menu: menu.data,
-        }
-    }
-
-    render(){
-        return (
-            <nav>
-                <div className="nav-wrapper">
-                    <Link href="/"><a href="#" className="brand-logo">Logo</a></Link>
-                    <ul id="nav-mobile" className="right">
-                        <li><Link href="/posts"><a href="/posts">Articles</a></Link></li>
-                        <li><Link href="/about"><a href="/about">A propos</a></Link></li>
-                        {
-                            this.props.menu.items.map( item => {
-                                return (
-                                    <li key={ item.id }>
-                                        <Link href={ `${ item.url }` }>
-                                            <a href={ `${ item.url }` }>
-                                                { item.title }
-                                            </a>
-                                        </Link>
-                                    </li>
-                                )
-                            })
-                        }
+const Navigation = (props) => {
+    
+    return (
+        <nav>
+            <div className="nav-wrapper">
+                <Link href="/"><a>Accueil</a></Link>
+                <ul id="nav-mobile">
+                    <li><Link href="/categories"><a>Catégories</a></Link></li>
+                    <ul>
+                        <li><Link href="/categories"><a>Beauté</a></Link></li>
+                        <li><Link href="/categories"><a>Lifestyle</a></Link></li>
+                        <li><Link href="/categories"><a>Foode</a></Link></li>
+                        <li><Link href="/categories"><a>Marques</a></Link></li>
                     </ul>
-                </div>
-            </nav>
-        )
-    }
+                    <li><Link href="/posts"><a>Articles</a></Link></li>
+                    <li><Link href="/bons-plans"><a>Bons Plans</a></Link></li>
+                    <li><Link href="/about"><a>Qui suis-je ?</a></Link></li>
+                    <li><Link href="/contact"><a>Contact</a></Link></li>
+                </ul>
+            </div>
+        </nav>
+    )
 }
+
+export default Navigation

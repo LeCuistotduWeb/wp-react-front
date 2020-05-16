@@ -1,5 +1,5 @@
 const defaultConfig = {
-    siteUrl: 'http://wp-test.test',
+    siteUrl: 'http://wordpress-test/',
 };
 
 export default defaultConfig;

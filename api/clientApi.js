@@ -8,7 +8,7 @@ var config = {
 export default class clientApi {
 
     /**
-     * get posts
+     * get Posts
      * @param {number} limit
      */
     static getPosts(limit) {
@@ -19,7 +19,7 @@ export default class clientApi {
     }
 
     /**
-     * get post
+     * get Post
      * @param {string} slug
      */
     static getPost(slug) {
@@ -27,7 +27,26 @@ export default class clientApi {
     }
 
     /**
-     * get pages
+     * get Bons Plans
+     * @param {number} limit
+     */
+    static getBonsPlans(limit) {
+        if (limit > 0) {
+            return axios.get(`${defaultConfig.siteUrl}/wp-json/wp/v2/bons_plans?per_page=${limit}`, config)
+        }
+        return axios.get(`${defaultConfig.siteUrl}/wp-json/wp/v2/bons_plans`)
+    }
+
+    /**
+     * get Bon Plan
+     * @param {string} slug
+     */
+    static getBonPlan(slug) {
+        return axios.get(`${defaultConfig.siteUrl}/wp-json/wp/v2/bons_plans?slug=${slug}`)
+    }
+
+    /**
+     * get Pages
      * @param {number} limit
      */
     static getPages(limit) {
@@ -38,14 +57,23 @@ export default class clientApi {
     }
 
     /**
+     * get Page
+     * @param {number} id
+     */
+    static getPage(id) {
+        return axios.get(`${defaultConfig.siteUrl}/wp-json/wp/v2/pages?id=${id}`)
+    }
+
+    /**
      * get menus
      */
     static getMenus() {
-        return resp = axios.get(`${defaultConfig.siteUrl}/wp-json/menus/v1/menus`) 
+        return axios.get(`${defaultConfig.siteUrl}/wp-json/menus/v1/menus`) 
     }
 
     /**
      * get menu
+     * @param {string} slug
      */
     static getMenu(slug) {
         return axios.get( `${defaultConfig.siteUrl}/wp-json/menus/v1/menus/${slug}`)
