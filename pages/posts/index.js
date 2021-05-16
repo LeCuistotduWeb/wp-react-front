@@ -1,5 +1,4 @@
 import DefaulLayout from '../../layouts/defaultLayout'
-import { Fragment } from 'react'
 import clientApi from '../../api/clientApi'
 import Link from 'next/link'
 
@@ -8,26 +7,29 @@ const Posts = (props) => {
     const {posts} = props
 
     return (
-            <Fragment>
+            <>
                 <DefaulLayout>
-                <h1>posts : </h1>
+                <h1>Les articles : </h1>
                 {posts.map( post => {
                     return (
                         <li key={ post.id }>
-                            <Link href={ `/posts/${ post.slug }` }>
+                            <Link href={ `/${ post.slug }` }>
                                 <a>{ post.title.rendered }</a>
                             </Link>
                         </li>
                     )
                 })}
                 </DefaulLayout>
-            </Fragment>
+            </>
         )
 }
-
-Posts.getInitialProps = async ctx => {
-  const res = await clientApi.getPosts()
-  return { posts: res.data }
+export async function getServerSideProps(ctx) {
+  const res = await clientApi.getPosts(15)
+  return {
+      props: {
+          posts: res.data
+      }
+  }
 }
 
 export default Posts

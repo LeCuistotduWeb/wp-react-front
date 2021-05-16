@@ -1,25 +1,34 @@
-import { Fragment } from 'react'
 import clientApi from '../../api/clientApi'
 import DefaulLayout from '../../layouts/defaultLayout'
+import CommentForm from '../../components/comments/CommentForm'
+import CommentsList from '../../components/comments/CommentList'
 
 const Post = (props) => {
     
-    const {post} = props
+    const {post, comments} = props
 
     return (
-        <Fragment>
+        <>
             <DefaulLayout>
-                <h1>{ post.title.rendered }</h1>
+                <h1>{ post.title.rendered }</h1>:
                 <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
+
+                {/* Section Comments */}
+                <CommentsList comments={comments} />                               
+                <CommentForm post_id={post.id}/>
             </DefaulLayout>
-        </Fragment>
+        </>
     )
 }
 
-Post.getInitialProps = async ctx => {
+export async function getServerSideProps(ctx) {
   const res = await clientApi.getPost(ctx.query.slug)
+  const comments = await clientApi.getPostComment(res.data[0].id)
   return {
-      post: res.data[0],
+      props: {
+        post: res.data[0],
+        comments: comments.data,
+      }
   }
 }
 

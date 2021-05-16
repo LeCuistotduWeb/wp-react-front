@@ -1,29 +1,38 @@
-import {Fragment} from 'react'
-import clientApi from '../api/clientApi'
-import DefaultLayout from '../layouts/defaultLayout'
 import Link from 'next/link'
+import DefaultLayout from '../layouts/defaultLayout'
+import defaultConfig from '../config'
+import clientApi from '../api/clientApi'
 
-const HomePage = (props) => {
-
-  const {datas} = props
+const HomePage = ({posts}) => {
 
   return (
-    <Fragment>
+    <>
       <DefaultLayout>
-        
-        <h1>{datas.title.rendered}</h1>
-        <div dangerouslySetInnerHTML={{ __html: datas.content.rendered }} />
+        <h1>{defaultConfig.shortName}</h1>
+
+        <h2>Les derniers articles :</h2>
+        {posts && posts.map( post => {
+            return (
+                <li key={ post.id }>
+                    <Link href={ `/${ post.slug }` }>
+                        <a>{ post.title.rendered }</a>
+                    </Link>
+                </li>
+            )
+        })}
 
       </DefaultLayout>
-    </Fragment>
+    </>
   )
 }
 
-HomePage.getInitialProps = async ctx => {
-  const res = await clientApi.getPage(22)
+export async function getServerSideProps(ctx) {
+  const res = await clientApi.getPosts(5)
   return {
-    datas: res.data[0]
+      props: {
+          posts: res.data
+      }
   }
 }
 
-  export default HomePage
+export default HomePage

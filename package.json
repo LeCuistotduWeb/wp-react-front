@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node server.js ",
     "build": "next build",
     "start": "NODE_PATH=. NODE_ENV=production node server.js"
   },

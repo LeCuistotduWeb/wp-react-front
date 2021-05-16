@@ -1,16 +1,14 @@
+import LoginForm from '../components/login/LoginForm'
 import Navigation from '../components/Navigation'
 import GlobalContext from '../store/globalContext'
 
 const DefaultLayout = props => {
 
-    const contextValue = {
-        navigation: [],
-        updateNavigation: () => {}
-    }
 
     return (
-        <GlobalContext.Provider value={contextValue}>
+        <GlobalContext.Provider value={GlobalContext}>
             <Navigation/>
+            <LoginForm/>
             { props.children }
         </GlobalContext.Provider>
     )
